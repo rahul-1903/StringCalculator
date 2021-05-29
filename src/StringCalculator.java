@@ -41,13 +41,20 @@ public class StringCalculator {
         m.matches();
         String delimiter = m.group(1);
 
+        List<String> delimiterArray = new ArrayList<>();
         Matcher nm = Pattern.compile("\\[(.+?)\\]").matcher(delimiter);
-        if (nm.find()) {
-            delimiter = nm.group(1);
+        while (nm.find()) {
+            delimiterArray.add(nm.group(1));
         }
-
+        if (delimiterArray.size() > 0)
+            delimiter = "";
+        for (int i=0; i<delimiterArray.size(); i++) {
+            delimiter += Pattern.quote(delimiterArray.get(i));
+            if (i != delimiterArray.size() - 1)
+                delimiter += "|";
+        }
         numbers = m.group(2);
-        tokens = numbers.split(Pattern.quote(delimiter));
+        tokens = numbers.split(delimiter);
         return tokens;
     }
 
