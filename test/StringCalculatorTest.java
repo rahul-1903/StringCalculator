@@ -31,4 +31,9 @@ class StringCalculatorTest {
     public void handleCustomDelimiter() {
         assertEquals(3, StringCalculator.Add("//;\n1;2"));
     }
+
+    @Test
+    public void handleSpecialDelimiter() {
+        assertEquals(3, StringCalculator.Add("//.\n1.2"));
+    }
 }
