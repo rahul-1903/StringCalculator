@@ -17,4 +17,8 @@ class StringCalculatorTest {
     @Test void addStringContainingTwoNumbers() {
         assertEquals(3, StringCalculator.Add("1,2"));
     }
+
+    @Test void sumIfStringContainsMoreThanTwoNumbers() {
+        assertEquals(6, StringCalculator.Add("1,2,3"));
+    }
 }
