@@ -7,28 +7,30 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
     public static int Add(String numbers) {
-        if (numbers.isEmpty()) {
-            return 0;
-        }
 
         String[] tokens = getTokens(numbers);
-        List<String> negatives = Arrays.stream(tokens)
-                .filter(elem -> Integer.parseInt(elem) < 0)
-                .collect(Collectors.toList());
+        List<String> negatives = getNegatives(tokens);
         if (negatives.size() > 0) {
             throw new RuntimeException("negatives not allowed: " + negatives.stream().collect(Collectors.joining(",")));
         }
         return getSum(tokens);
     }
 
+    private static List<String> getNegatives(String[] tokens) {
+        return Arrays.stream(tokens)
+                .filter(elem -> Integer.parseInt(elem) < 0)
+                .collect(Collectors.toList());
+    }
+
     private static String[] getTokens(String numbers) {
-        String[] tokens;
-        if (numbers.startsWith("//")) {
-            tokens = getTokensByCustomDelimiter(numbers);
-        } else {
-            tokens = getTokensByDefaultDelimiter(numbers);
+        if (numbers.isEmpty()) {
+            return new String[0];
         }
-        return tokens;
+        if (numbers.startsWith("//")) {
+            return getTokensByCustomDelimiter(numbers);
+        } else {
+            return getTokensByDefaultDelimiter(numbers);
+        }
     }
 
     private static String[] getTokensByDefaultDelimiter(String numbers) {
@@ -36,9 +38,14 @@ public class StringCalculator {
     }
 
     private static String[] getTokensByCustomDelimiter(String numbers) {
-        String[] tokens;
         Matcher m = Pattern.compile("//(.+)\n(.*)").matcher(numbers);
         m.matches();
+        String delimiter = getDelimiterFromMatches(m);
+        numbers = m.group(2);
+        return numbers.split(delimiter);
+    }
+
+    private static String getDelimiterFromMatches(Matcher m) {
         String delimiter = Pattern.quote(m.group(1));
 
         List<String> delimiterArray = new ArrayList<>();
@@ -46,16 +53,16 @@ public class StringCalculator {
         while (nm.find()) {
             delimiterArray.add(nm.group(1));
         }
-        if (delimiterArray.size() > 0)
+        if (delimiterArray.size() > 0) {
             delimiter = "";
-        for (int i=0; i<delimiterArray.size(); i++) {
-            delimiter += Pattern.quote(delimiterArray.get(i));
-            if (i != delimiterArray.size() - 1)
-                delimiter += "|";
         }
-        numbers = m.group(2);
-        tokens = numbers.split(delimiter);
-        return tokens;
+        for (int i = 0; i < delimiterArray.size(); i++) {
+            delimiter += Pattern.quote(delimiterArray.get(i));
+            if (i != delimiterArray.size() - 1) {
+                delimiter += "|";
+            }
+        }
+        return delimiter;
     }
 
     private static int getSum(String[] tokens) {
