@@ -46,4 +46,14 @@ class StringCalculatorTest {
             // exception received
         }
     }
+
+    @Test
+    public void exceptionShouldContainNegativeNumber() {
+        try {
+            StringCalculator.Add("-1,2,3");
+            fail("RuntimeException Excepted");
+        } catch(RuntimeException e) {
+            assertEquals("negatives not allowed: 1", e.getMessage());
+        }
+    }
 }
