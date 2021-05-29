@@ -71,4 +71,9 @@ class StringCalculatorTest {
     public void IgnoreNumbersGreaterThanThousand() {
         assertEquals(2, StringCalculator.Add("1001,2"));
     }
+
+    @Test
+    public void handleDelimiterOfGreaterLength() {
+        assertEquals(6, StringCalculator.Add("//[***]\n1***2***3"));
+    }
 }

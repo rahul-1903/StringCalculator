@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -39,6 +40,12 @@ public class StringCalculator {
         Matcher m = Pattern.compile("//(.+)\n(.*)").matcher(numbers);
         m.matches();
         String delimiter = m.group(1);
+
+        Matcher nm = Pattern.compile("\\[(.+?)\\]").matcher(delimiter);
+        if (nm.find()) {
+            delimiter = nm.group(1);
+        }
+
         numbers = m.group(2);
         tokens = numbers.split(Pattern.quote(delimiter));
         return tokens;
