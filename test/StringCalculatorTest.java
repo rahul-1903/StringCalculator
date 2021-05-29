@@ -36,4 +36,14 @@ class StringCalculatorTest {
     public void handleSpecialDelimiter() {
         assertEquals(3, StringCalculator.Add("//.\n1.2"));
     }
+
+    @Test
+    public void shouldRaiseExceptionOnNegativeNumbers() {
+        try {
+            StringCalculator.Add("-1,2,3");
+            fail("RuntimeException Excepted");
+        } catch(RuntimeException e) {
+            // exception received
+        }
+    }
 }
