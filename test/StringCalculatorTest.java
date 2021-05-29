@@ -8,4 +8,9 @@ class StringCalculatorTest {
     public void addNumberInEmptyString() {
         assertEquals(0, StringCalculator.Add(""));
     }
+
+    @Test
+    public void addIfStringContainsOneNumber() {
+        assertEquals(1, StringCalculator.Add("1"));
+    }
 }
