@@ -13,4 +13,8 @@ class StringCalculatorTest {
     public void addIfStringContainsOneNumber() {
         assertEquals(1, StringCalculator.Add("1"));
     }
+
+    @Test void addStringContainingTwoNumbers() {
+        assertEquals(3, StringCalculator.Add("1,2"));
+    }
 }
