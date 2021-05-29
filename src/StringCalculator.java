@@ -1,6 +1,8 @@
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringCalculator {
     public static int Add(String numbers) {
@@ -9,7 +11,12 @@ public class StringCalculator {
         }
 
         String[] tokens = getTokens(numbers);
-
+        List<String> negatives = Arrays.stream(tokens)
+                .filter(elem -> Integer.parseInt(elem) < 0)
+                .collect(Collectors.toList());
+        if (negatives.size() > 0) {
+            throw new RuntimeException("negatives not allowed");
+        }
         return getSum(tokens);
     }
 
