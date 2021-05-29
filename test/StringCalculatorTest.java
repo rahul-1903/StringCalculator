@@ -21,4 +21,9 @@ class StringCalculatorTest {
     @Test void sumIfStringContainsMoreThanTwoNumbers() {
         assertEquals(6, StringCalculator.Add("1,2,3"));
     }
+
+    @Test
+    public void handleNewLinesInInput() {
+        assertEquals(6, StringCalculator.Add("“1\n2,3"));
+    }
 }
