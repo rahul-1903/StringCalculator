@@ -39,7 +39,7 @@ public class StringCalculator {
         String[] tokens;
         Matcher m = Pattern.compile("//(.+)\n(.*)").matcher(numbers);
         m.matches();
-        String delimiter = m.group(1);
+        String delimiter = Pattern.quote(m.group(1));
 
         List<String> delimiterArray = new ArrayList<>();
         Matcher nm = Pattern.compile("\\[(.+?)\\]").matcher(delimiter);
