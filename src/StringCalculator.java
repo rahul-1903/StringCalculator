@@ -33,7 +33,7 @@ public class StringCalculator {
         m.matches();
         String delimiter = m.group(1);
         numbers = m.group(2);
-        tokens = numbers.split(delimiter);
+        tokens = numbers.split(Pattern.quote(delimiter));
         return tokens;
     }
 
