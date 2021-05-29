@@ -53,7 +53,7 @@ class StringCalculatorTest {
             StringCalculator.Add("-1,2,3");
             fail("RuntimeException Excepted");
         } catch(RuntimeException e) {
-            assertEquals("negatives not allowed: 1", e.getMessage());
+            assertEquals("negatives not allowed: -1", e.getMessage());
         }
     }
 }
