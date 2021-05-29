@@ -47,6 +47,7 @@ public class StringCalculator {
     private static int getSum(String[] tokens) {
         return Arrays.stream(tokens)
                 .mapToInt(Integer::parseInt)
+                .filter(elem -> elem <= 1000)
                 .sum();
     }
 }
