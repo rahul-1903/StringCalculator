@@ -26,4 +26,9 @@ class StringCalculatorTest {
     public void handleNewLinesInInput() {
         assertEquals(6, StringCalculator.Add("1\n2,3"));
     }
+
+    @Test
+    public void handleCustomDelimiter() {
+        assertEquals(6, StringCalculator.Add("//;\n1;2"));
+    }
 }
