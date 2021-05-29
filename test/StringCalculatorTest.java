@@ -56,4 +56,14 @@ class StringCalculatorTest {
             assertEquals("negatives not allowed: -1", e.getMessage());
         }
     }
+
+    @Test
+    public void exceptionShouldContainAllNegativeNumbers() {
+        try {
+            StringCalculator.Add("-1,-2,-3");
+            fail("RuntimeException Excepted");
+        } catch(RuntimeException e) {
+            assertEquals("negatives not allowed: -1,-2,-3", e.getMessage());
+        }
+    }
 }
