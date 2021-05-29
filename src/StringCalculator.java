@@ -15,7 +15,7 @@ public class StringCalculator {
                 .filter(elem -> Integer.parseInt(elem) < 0)
                 .collect(Collectors.toList());
         if (negatives.size() > 0) {
-            throw new RuntimeException("negatives not allowed: " + negatives.get(0));
+            throw new RuntimeException("negatives not allowed: " + negatives.stream().collect(Collectors.joining(",")));
         }
         return getSum(tokens);
     }
